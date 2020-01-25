@@ -1,7 +1,7 @@
 const db = require('./index.js');
 
 const seedDb = () => {
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 100; i++) {
 
     // Create a template objects for business hours
     let businessHours = {
@@ -58,8 +58,8 @@ const seedDb = () => {
       businessHours.Mon = [];
     };
 
-    // Generate a random party size number between 4 and 8
-    let randomPartySize = Math.floor((Math.random() * 4) + 4);
+    // Generate a random party size number between 4 and 8 in increments of 2
+    let randomPartySize = Math.floor((Math.random() * 3) + 2) * 2;
 
     // Create new instance of Calendar model
     let calendarData = new db.Calendar({
@@ -77,3 +77,6 @@ const seedDb = () => {
     });
   }
 }
+
+// UNCOMMENT FUNCTION BELOW AND RUN TO SEED DATABASE
+// seedDb();
