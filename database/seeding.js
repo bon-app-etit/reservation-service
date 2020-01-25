@@ -32,7 +32,7 @@ const seedDb = () => {
     let isClosedMondays = generateBool();
     
     // Apply randomization of hours
-    if (isOpenBreakfast) {
+    if (!isOpenBreakfast) {
       for (day in businessHours) {
         businessHours[day] = businessHours[day].concat(breakfast);
       }
@@ -46,7 +46,7 @@ const seedDb = () => {
       for (day in businessHours) {
         businessHours[day] = businessHours[day].concat(dinner);
         let closesEarly = generateBool();
-        if (closesEarly) {
+        if (!closesEarly) {
           businessHours[day].splice(businessHours[day].length-2, 2);
         }
       }
@@ -79,4 +79,4 @@ const seedDb = () => {
 }
 
 // UNCOMMENT FUNCTION BELOW AND RUN TO SEED DATABASE
-// seedDb();
+seedDb();
