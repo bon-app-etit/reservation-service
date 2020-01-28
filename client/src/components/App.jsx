@@ -11,7 +11,7 @@ class App extends React.Component {
   }
 
   getData() {
-    axios.get('/')
+    axios.get('/api/reservations/')
       .then((response) => {
         console.log(response);
       })
