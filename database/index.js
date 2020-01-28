@@ -20,7 +20,6 @@ let Calendar = mongoose.model('Calendar', calendarSchema);
 
 // Define function to query db
 const queryDb = (callback) => {
-
   Calendar.find({}, (err, data) => {
     if (err) {
       callback(err);

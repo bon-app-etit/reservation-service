@@ -5,21 +5,37 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.19.2",
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
     "express": "^4.17.1",
     "mongoose": "^5.8.9",
     "nodemon": "^2.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node ./database/seeding.js",
-    "start": "nodemon ./server/index.js"
+    "start": "nodemon ./server/index.js",
+    "react-dev": "webpack -d --watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TeamofThr33/yelp-reservations-calendar.git"
+  },
+  "babel": {
+    "presets": [
+      "@babel/env",
+      "@babel/react"
+    ]
   },
   "author": "",
   "license": "ISC",

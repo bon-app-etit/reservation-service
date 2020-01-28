@@ -11,7 +11,6 @@ app.listen(port, () => { console.log(`Now listening on ${port}`) });
 
 // Build route handlers
 app.get('/', (req, res) => {
-
   db.queryDb((err, data) => {
     if (err) {
       console.log('Error getting data from db ', err);
