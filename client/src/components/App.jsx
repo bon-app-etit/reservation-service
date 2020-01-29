@@ -1,5 +1,5 @@
-import React from ('react');
-import axios from ('axios');
+import React from 'react';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class App extends React.Component {
   }
 
   getData() {
-    axios.get('/')
+    axios.get('/api/reservations/')
       .then((response) => {
         console.log(response);
       })
@@ -20,7 +20,13 @@ class App extends React.Component {
       });
   }
 
-  render () {
-    //Insert React HTML for basic App here
-  }
+  render() {
+    return (
+    <div>
+      <h1>Successful App rendering test</h1>
+    </div>
+    );
+  };
 }
+
+export default App;
