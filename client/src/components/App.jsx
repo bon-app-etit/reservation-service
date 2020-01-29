@@ -20,14 +20,13 @@ class App extends React.Component {
       });
   }
 
-  render () {
-    //Insert React HTML for basic App here
+  render() {
     return (
     <div>
       <h1>Successful App rendering test</h1>
     </div>
-    )
-  }
+    );
+  };
 }
 
 export default App;
