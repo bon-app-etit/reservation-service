@@ -50,33 +50,32 @@ class App extends React.Component {
   }
 
   render() {
-
     return (
-
       <div className={styles.reservationMod} id="reservationBox">
 
-        <div className={styles.reservationMod} id="header">
+        <div id="header">
           <h2>Make a Reservation</h2>
         </div>
 
-        <div className={styles.reservationMod} id="calendar">
+        <div id="calendar">
           <input />
         </div>
 
-        <div className={styles.reservationMod} id="selectRow">
+        <div id="selectRow">
             <select name="time" value={this.state.time} onChange={this.handleChange}> 
               {sampleData.openHours.Mon.map((time, index) => {
-                  return <option value={time} key={index}>{time}</option>
+                return <option value={time} key={index}>{time}</option>
               })}
             </select>
 
             <select name="partySize" value={this.state.partySize} onChange={this.handleChange}>
-              {}
-
+              {this.partySizes.map((party, index) => {
+                return <option value={party} key={index}>{party}</option>
+              })}
             </select>
         </div>
 
-        <div className={styles.reservationMod} id="button">
+        <div id="button">
           <button>Find a Table</button>
         </div>
 
