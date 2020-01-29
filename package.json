@@ -18,11 +18,15 @@
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest": "^25.1.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config ./jest.config.json",
+    "test-watch": "npm run test -- --watch",
     "seed": "node ./database/seeding.js",
     "start": "nodemon ./server/index.js",
     "react-dev": "webpack -d --watch"
