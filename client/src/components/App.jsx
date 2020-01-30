@@ -15,6 +15,9 @@ class App extends React.Component {
       partySize: 2
     }
 
+    this.partySizes = ['1 person'];
+    this.generatePartySizes(this.partySizes);
+
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -24,8 +27,16 @@ class App extends React.Component {
 
   handleChange(event) {
     this.setState({
-      time: event.target.value
+      [event.target.name]: event.target.value
     })
+  }
+
+  generatePartySizes(array) {
+    let maxSize = sampleData.maxPartySize
+    for (var i = 2; i <= maxSize; i++) {
+      let size = `${i} people`;
+      array.push(size);
+    }
   }
 
   getData() {
@@ -39,27 +50,33 @@ class App extends React.Component {
   }
 
   render() {
-
-    console.log(sampleData.openHours.Mon);
     return (
-
       <div className={styles.reservationMod} id="reservationBox">
 
-        <div className={styles.reservationMod} id="header">
+        <div id="header">
           <h2>Make a Reservation</h2>
         </div>
 
-        <div className={styles.reservationMod} id="calendar">
+        <div id="calendar">
           <input />
         </div>
 
-        <div className={styles.reservationMod} id="selectRow">
-            <select value={this.state.time} onChange={this.handleChange}> 
+        <div id="selectRow">
+            <select name="time" value={this.state.time} onChange={this.handleChange}> 
               {sampleData.openHours.Mon.map((time, index) => {
-                  return <option value={time} key={index}>{time}</option>
+                return <option value={time} key={index}>{time}</option>
               })}
             </select>
-            <select />
+
+            <select name="partySize" value={this.state.partySize} onChange={this.handleChange}>
+              {this.partySizes.map((party, index) => {
+                return <option value={party} key={index}>{party}</option>
+              })}
+            </select>
+        </div>
+
+        <div id="button">
+          <button>Find a Table</button>
         </div>
 
       </div>
