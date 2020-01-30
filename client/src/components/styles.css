@@ -1,6 +1,60 @@
 .reservationMod {
-  padding: 14px;
-  /* colors for testing loading with React */
-  color: white;
-  background-color: black;
+  padding: 14px 11px 11px;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 4px;
+  width: 295px;
+  height: 150px;
+}
+
+#header {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.28571em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
+}
+
+#calendar {
+  width: 100%;
+  text-align: center;
+  height: 36px;
+}
+
+#selectRow {
+  margin-left: -3px;
+  margin-right: -3px;
+  display: flex;
+  table-layout: auto;
+  border-spacing: 6px;
+  padding: 6px;
+  height: 36px;
+}
+
+#time {
+  width: 50%;
+  height: 100%;
+  padding: 5px 24px 5px 30px;
+}
+
+#party {
+  width: 50%;
+  height: 100%;
+  padding: 5px 24px 5px 30px;
+}
+
+#button {
+  width: 100%;
+  background: #d32323;
+  border: 1px solid #d32323;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 700;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.28571em;
+  padding: 8px 19px 9px;
+  border-radius: 3px;
+  color: #fff;
 }

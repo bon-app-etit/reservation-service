@@ -10,11 +10,13 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      date: '',
+      date: this.dateString,
       time: '7:00 pm',
       partySize: 2
     }
 
+    this.date = new Date();
+    this.dateString = this.date.toDateString();
     this.partySizes = ['1 person'];
     this.generatePartySizes(this.partySizes);
 
@@ -50,33 +52,34 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.date);
     return (
       <div className={styles.reservationMod} id="reservationBox">
 
-        <div id="header">
+        <div id={styles.header}>
           <h2>Make a Reservation</h2>
         </div>
 
-        <div id="calendar">
-          <input />
+        <div>
+          <input id={styles.calendar} defaultValue={this.dateString}/>
         </div>
 
-        <div id="selectRow">
-            <select name="time" value={this.state.time} onChange={this.handleChange}> 
+        <div id={styles.selectRow}>
+            <select id={styles.time} name="time" value={this.state.time} onChange={this.handleChange}> 
               {sampleData.openHours.Mon.map((time, index) => {
                 return <option value={time} key={index}>{time}</option>
               })}
             </select>
 
-            <select name="partySize" value={this.state.partySize} onChange={this.handleChange}>
+            <select id={styles.party} name="partySize" value={this.state.partySize} onChange={this.handleChange}>
               {this.partySizes.map((party, index) => {
                 return <option value={party} key={index}>{party}</option>
               })}
             </select>
         </div>
 
-        <div id="button">
-          <button>Find a Table</button>
+        <div>
+          <button id={styles.button}>Find a Table</button>
         </div>
 
       </div>
