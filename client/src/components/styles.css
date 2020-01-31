@@ -2,24 +2,32 @@
   padding: 14px 11px 11px;
   border: 1px solid rgb(230, 230, 230);
   border-radius: 4px;
-  width: 295px;
-  height: 150px;
+  width: 317px;
+  height: 155px;
+}
+
+#reservationBox {
+  color: black;
 }
 
 #header {
-  font-size: 15px;
+  font-size: 21px;
   font-weight: 700;
   line-height: 1.28571em;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
   margin-bottom: 6px;
-  display: block;
+  /* display: block; */
+  vertical-align: baseline;
+  margin-top: 0px;
 }
 
-#calendar {
+#calendarSelect {
   width: 100%;
   text-align: center;
   height: 36px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
 }
 
 #selectRow {
@@ -33,15 +41,25 @@
 }
 
 #time {
-  width: 50%;
+  width: 49%;
   height: 100%;
   padding: 5px 24px 5px 30px;
+  margin: 0 auto;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
 }
 
 #party {
-  width: 50%;
+  width: 49%;
   height: 100%;
   padding: 5px 24px 5px 30px;
+  margin: 0 auto;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+.select-wrapper {
+  position: relative;
 }
 
 #button {
@@ -57,4 +75,29 @@
   padding: 8px 19px 9px;
   border-radius: 3px;
   color: #fff;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+}
+
+.captionRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+th {
+  display: flex;
+}
+
+td {
+  text-align: center;
+  border: solid 1px black;
+  width: calc(100% / 7);
+}
+
+tr {
+  display: flex;
+  justify-content: space-between;
 }
