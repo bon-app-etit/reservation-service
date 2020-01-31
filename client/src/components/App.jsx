@@ -13,7 +13,8 @@ class App extends React.Component {
     this.state = {
       date: this.dateString,
       time: '7:00 pm',
-      partySize: 2,
+      partySize: '2 people',
+      displayCalendar: false,
     };
 
     this.date = new Date();
@@ -23,24 +24,12 @@ class App extends React.Component {
     this.generatePartySizes(this.partySizes);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleDayClick = this.handleDayClick.bind(this);
+    this.displayCalendar = this.displayCalendar.bind(this);
   }
 
   componentDidMount() {
     // this.getData();
-  }
-
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
-  generatePartySizes(array) {
-    let maxSize = sampleData.maxPartySize
-    for (var i = 2; i <= maxSize; i++) {
-      let size = `${i} people`;
-      array.push(size);
-    }
   }
 
   getData() {
@@ -53,6 +42,39 @@ class App extends React.Component {
       });
   }
 
+  generatePartySizes(array) {
+    let maxSize = sampleData.maxPartySize
+    for (var i = 2; i <= maxSize; i++) {
+      let size = `${i} people`;
+      array.push(size);
+    }
+  }
+
+  displayCalendar() {
+    this.setState({
+      displayCalendar: !this.state.displayCalendar,
+    });
+  }
+
+  handleDayClick(event) {
+    let day = event.target.innerText;
+    if (day < 10) {
+      day = `0${day}`;
+    }
+    const dateUTC = new Date(`2020-02-${day}T10:20:30Z`);
+    const dateString = dateUTC.toDateString();
+    this.setState({
+      date: dateString,
+      displayCalendar: false,
+    });
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
   render() {
     return (
       <div className={styles.reservationMod} id="reservationBox">
@@ -62,32 +84,18 @@ class App extends React.Component {
         </div>
 
         <div>
-          <input id={styles.calendarSelect} defaultValue={this.dateString}/>
+          <input id={styles.calendarSelect} defaultValue={this.dateString} value={this.state.date} onClick={this.displayCalendar} />
         </div>
 
         <div id={styles.selectRow}>
-          {/* <div className="select-wrapper"> */}
-            {/* <div className="select-icon-container">
-            <span className="select-icon">
-              ::before
-              <svg />
-              ::after
-            </span>
-            </div> */}
-            <select id={styles.time} name="time" value={this.state.time} onChange={this.handleChange}> 
-              {sampleData.openHours.Mon.map((time, index) => {
-                return <option value={time} key={index}>{time}</option>
-              })}
-            </select>
-          {/* </div> */}
-{/* 
-          <div className="select-wrapper"> */}
-            <select id={styles.party} name="partySize" value={this.state.partySize} onChange={this.handleChange}>
-              {this.partySizes.map((party, index) => {
-                return <option value={party} key={index}>{party}</option>
-              })}
-            </select>
-          {/* </div> */}
+          <select id={styles.time} name="time" value={this.state.time} onChange={this.handleChange}>
+            {sampleData.openHours.Mon.map((time, index) => <option value={time} key={index}>{time}</option>)}
+          </select>
+
+          <select id={styles.party} name="partySize" value={this.state.partySize} onChange={this.handleChange}>
+            {this.partySizes.map((party, index) => <option value={party} key={index}>{party}</option>)}
+          </select>
+
         </div>
 
         <div>
@@ -95,7 +103,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          <Calendar />
+          {this.state.displayCalendar ? <Calendar handleDayClick={this.handleDayClick} /> : null}
         </div>
 
       </div>
