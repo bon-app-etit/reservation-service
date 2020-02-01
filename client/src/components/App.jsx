@@ -23,6 +23,9 @@ class App extends React.Component {
     this.partySizes = ['1 person'];
     this.generatePartySizes(this.partySizes);
 
+    this.partySizes = ['1 person'];
+    this.generatePartySizes(this.partySizes);
+
     this.handleChange = this.handleChange.bind(this);
     this.handleDayClick = this.handleDayClick.bind(this);
     this.displayCalendar = this.displayCalendar.bind(this);
@@ -74,6 +77,7 @@ class App extends React.Component {
       [event.target.name]: event.target.value,
     });
   }
+
 
   render() {
     return (
