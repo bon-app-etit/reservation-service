@@ -2,5 +2,9 @@
   "testRegex": "((\\.|/*.)(spec))\\.js?$",
   "setupFilesAfterEnv": [
     "<rootDir>/jest.setup.js"
-  ]
+  ],
+  "transform": {
+    "^.+\\.[t|j]sx?$": "babel-jest",
+    ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
+  }
 }

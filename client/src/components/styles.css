@@ -151,6 +151,7 @@ td {
 
 .filledCell:hover {
   background-color: rgb(227, 240, 245);
+  cursor: pointer;
 }
 
 .greyCell {

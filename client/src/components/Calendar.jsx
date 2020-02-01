@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import styles from './styles.css';
 
@@ -6,7 +7,7 @@ class Calendar extends React.Component {
     super(props);
 
     this.state = {
-      isDisplayed: false
+      month: 0,
     };
   }
 
