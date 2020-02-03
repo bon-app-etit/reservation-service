@@ -57,6 +57,7 @@ class App extends React.Component {
   }
 
   handleDayClick(event) {
+    console.log(event);
     let day = event.target.innerText;
     if (day < 10) {
       day = `0${day}`;

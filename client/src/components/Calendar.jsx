@@ -49,19 +49,45 @@ class Calendar extends React.Component {
     return calendarRows;
   }
 
+  handleLeftArrowClick(event) {
+    if (this.state.month !== 0) {
+      this.setState({
+        month: this.state.month - 1,
+      });
+    } else {
+      this.setState({
+        year: this.state.year - 1,
+        month: 11,
+      });
+    }
+  }
+
+  handleRightArrowClick(event) {
+    if (this.state.month !== 11) {
+      this.setState({
+        month: this.state.month + 1,
+      });
+    } else {
+      this.setState({
+        year: this.state.year + 1,
+        month: 0,
+      });
+    }
+  }
+
   render() {
     const calendarPage = this.generateCalendar(this.state.year, this.state.month);
     return (
       <div className={styles.calendar}>
         <div className={styles.captionRow}>
           <div className={styles.arrowButton}>
-            <div className={styles.leftArrow}><i className="fas fa-angle-left" /></div>
+            <div className={styles.leftArrow} onClick={this.handleLeftArrowClick.bind(this)}><i className="fas fa-angle-left" /></div>
           </div>
           <div className={styles.monthYearContainer}>
             <div className={styles.monthYear}>{this.monthNames[this.state.month]} {this.state.year}</div>
           </div>
           <div className={styles.arrowButton}>
-            <div className={styles.rightArrow}><i className="fas fa-angle-right" /></div>
+            <div className={styles.rightArrow} onClick={this.handleRightArrowClick.bind(this)}><i className="fas fa-angle-right" /></div>
           </div>
         </div>
         <table>
