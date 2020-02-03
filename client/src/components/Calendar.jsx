@@ -48,8 +48,19 @@ class Calendar extends React.Component {
           daysInRow.push(greyCell);
         } else if (date > numOfDays) {
           const nextDate = date - numOfDays;
-          const greyCell = <td className={styles.greyCell} key={`next${nextDate}`}>{nextDate}</td>;
-          daysInRow.push(greyCell);
+          const futureGreyCell = (
+            <td 
+              className={styles.futureGreyCell}
+              key={`next${nextDate}`}
+              month={month}
+              year={year}
+              day={nextDate}
+              onClick={this.props.handleDayClick}
+            >
+              {nextDate}
+            </td>
+          );
+          daysInRow.push(futureGreyCell);
           date += 1;
         } else {
           if (this.closedDaysIndex.includes(i)) {
