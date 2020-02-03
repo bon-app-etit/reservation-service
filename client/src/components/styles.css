@@ -1,6 +1,161 @@
 .reservationMod {
-  padding: 14px;
-  /* colors for testing loading with React */
-  color: white;
-  background-color: black;
+  padding: 14px 11px 11px;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 4px;
+  width: 317px;
+  height: 155px;
+}
+
+#reservationBox {
+  color: black;
+}
+
+#header {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.28571em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+  margin-bottom: 6px;
+  vertical-align: baseline;
+  margin-top: 0px;
+}
+
+#calendarSelect {
+  width: 100%;
+  text-align: center;
+  height: 36px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+#selectRow {
+  margin-left: -3px;
+  margin-right: -3px;
+  display: flex;
+  table-layout: auto;
+  border-spacing: 6px;
+  padding: 6px;
+  height: 36px;
+}
+
+#time {
+  width: 49%;
+  height: 100%;
+  padding: 5px 24px 5px 30px;
+  margin: 0 auto;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+#party {
+  width: 49%;
+  height: 100%;
+  padding: 5px 24px 5px 30px;
+  margin: 0 auto;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+#button {
+  width: 100%;
+  background: #d32323;
+  border: 1px solid #d32323;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 700;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.28571em;
+  padding: 8px 19px 9px;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(230, 230, 230);
+  border-radius: 4px;
+  padding: 10px
+}
+
+.captionRow {
+  display: flex;
+  justify-content: space-between;
+  line-height: 2em;
+}
+
+.arrowButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#monthYearContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#monthYear {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  font-size: .925rem;
+  margin-bottom: 5px;
+}
+
+.tableHead {
+  height: 30px;
+  color: #d32323;
+}
+
+.weekday {
+  color: #d32323;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-align: center;
+  width: calc(100% / 7);
+  margin-bottom: 5px;
+}
+
+#tbody tr td {
+  text-align: center;
+  border: 1px solid rgb(230, 230, 230);
+  width: calc(100% / 7);
+  height: 30px;
+}
+
+tr {
+  display: flex;
+  justify-content: space-around;
+}
+
+td {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: #333;
+}
+
+.filledCell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.filledCell:hover {
+  background-color: rgb(227, 240, 245);
+}
+
+.greyCell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgba(51,51,51,.2);
 }
