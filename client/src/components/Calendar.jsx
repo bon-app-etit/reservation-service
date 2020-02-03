@@ -30,6 +30,11 @@ class Calendar extends React.Component {
     const numOfDaysPrev = 32 - new Date(year, month - 1, 32).getDate();
     const lastDayofPrevMonth = new Date(year, month - 1, numOfDaysPrev).getDay();
 
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    const currentMonth = Number(currentDate.getMonth());
+    const currentYear = currentDate.getFullYear();
+
     let date = 1;
     const calendarRows = [];
 
@@ -48,6 +53,9 @@ class Calendar extends React.Component {
           date += 1;
         } else {
           if (this.closedDaysIndex.includes(i)) {
+            const greyCell = <td className={styles.greyCell} key={`current${date}`}>{date}</td>;
+            daysInRow.push(greyCell);
+          } else if (month === currentMonth && date < currentDay) {
             const greyCell = <td className={styles.greyCell} key={`current${date}`}>{date}</td>;
             daysInRow.push(greyCell);
           } else {
