@@ -95,7 +95,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          <input id={styles.calendarSelect} defaultValue={this.dateString} value={this.state.date} onClick={this.displayCalendar} readOnly/>
+          <input id={styles.calendarSelect} defaultValue={this.dateString} value={this.state.date} onClick={this.displayCalendar} readOnly />
         </div>
 
         <div id={styles.selectRow}>
@@ -114,7 +114,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          {this.state.displayCalendar ? <Calendar currentDate={this.state.dateUTC} handleDayClick={this.handleDayClick} /> : null}
+          {this.state.displayCalendar ? <Calendar selectedDate={this.state.dateUTC} openHours={sampleData.openHours} handleDayClick={this.handleDayClick} /> : null}
         </div>
 
       </div>

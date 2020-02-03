@@ -8,12 +8,19 @@ class Calendar extends React.Component {
     super(props);
 
     this.state = {
-      year: this.props.currentDate.getFullYear(),
-      month: this.props.currentDate.getMonth(),
+      year: this.props.selectedDate.getFullYear(),
+      month: this.props.selectedDate.getMonth(),
     };
 
     this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
       'August', 'September', 'October', 'November', 'December'];
+    this.dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    this.closedDaysIndex = [];
+    for (let i = 0; i < this.dayNames.length; i += 1) {
+      if (this.props.openHours[this.dayNames[i]].length === 0) {
+        this.closedDaysIndex.push(i);
+      }
+    }
   }
 
   generateCalendar(year, month) {
@@ -40,19 +47,28 @@ class Calendar extends React.Component {
           daysInRow.push(greyCell);
           date += 1;
         } else {
-          const filledCell = (
-            <td
-              className={styles.filledCell}
-              key={`current${date}`}
-              month={month}
-              year={year}
-              day={date}
-              onClick={this.props.handleDayClick}
-            >
-              {date}
-            </td>
-          );
-          daysInRow.push(filledCell);
+          if (this.closedDaysIndex.includes(i)) {
+            const greyCell = <td className={styles.greyCell} key={`current${date}`}>{date}</td>;
+            daysInRow.push(greyCell);
+          } else {
+            const day = date < 10 ? `0${date}` : date;
+            let calendarMonth = Number(month) + 1;
+            calendarMonth = calendarMonth < 10 ? `0${calendarMonth}` : calendarMonth;
+            const dateString = (new Date(`${year}-${calendarMonth}-${day}T10:20:30Z`)).toDateString();
+            const filledCell = (
+              <td
+                className={dateString === this.props.selectedDate.toDateString() ? styles.selectedCell : styles.filledCell}
+                key={`current${date}`}
+                month={month}
+                year={year}
+                day={date}
+                onClick={this.props.handleDayClick}
+              >
+                {date}
+              </td>
+            );
+            daysInRow.push(filledCell);
+          }
           date += 1;
         }
       }
