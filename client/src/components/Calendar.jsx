@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import styles from './styles.css';
@@ -39,7 +40,18 @@ class Calendar extends React.Component {
           daysInRow.push(greyCell);
           date += 1;
         } else {
-          const filledCell = <td className={styles.filledCell} key={`current${date}`} onClick={this.props.handleDayClick}>{date}</td>;
+          const filledCell = (
+            <td
+              className={styles.filledCell}
+              key={`current${date}`}
+              month={month}
+              year={year}
+              day={date}
+              onClick={this.props.handleDayClick}
+            >
+              {date}
+            </td>
+          );
           daysInRow.push(filledCell);
           date += 1;
         }
@@ -84,7 +96,11 @@ class Calendar extends React.Component {
             <div className={styles.leftArrow} onClick={this.handleLeftArrowClick.bind(this)}><i className="fas fa-angle-left" /></div>
           </div>
           <div className={styles.monthYearContainer}>
-            <div className={styles.monthYear}>{this.monthNames[this.state.month]} {this.state.year}</div>
+            <div className={styles.monthYear}>
+              {this.monthNames[this.state.month]}
+              {' '}
+              {this.state.year}
+            </div>
           </div>
           <div className={styles.arrowButton}>
             <div className={styles.rightArrow} onClick={this.handleRightArrowClick.bind(this)}><i className="fas fa-angle-right" /></div>
