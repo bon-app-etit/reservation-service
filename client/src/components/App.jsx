@@ -15,6 +15,7 @@ class App extends React.Component {
       time: '7:00 pm',
       partySize: '2 people',
       displayCalendar: false,
+      dateUTC: new Date(),
     };
 
     this.date = new Date();
@@ -30,6 +31,10 @@ class App extends React.Component {
 
   componentDidMount() {
     // this.getData();
+    this.setState({
+      dateUTC: new Date(),
+      date: this.date.toDateString(),
+    });
   }
 
   getData() {
@@ -71,6 +76,7 @@ class App extends React.Component {
     this.setState({
       date: dateString,
       displayCalendar: false,
+      dateUTC: dateUTC,
     });
   }
 
@@ -108,7 +114,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          {this.state.displayCalendar ? <Calendar currentDate={this.date} handleDayClick={this.handleDayClick} /> : null}
+          {this.state.displayCalendar ? <Calendar currentDate={this.state.dateUTC} handleDayClick={this.handleDayClick} /> : null}
         </div>
 
       </div>

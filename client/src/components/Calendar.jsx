@@ -121,53 +121,18 @@ class Calendar extends React.Component {
           <tbody className={styles.tbody} id="tbody">
             <tr>
               {calendarPage[0].map((day) => day)}
-              {/* <td className={styles.greyCell}>30</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>1</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>2</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>3</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>4</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>5</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>6</td> */}
             </tr>
             <tr>
               {calendarPage[1].map((day) => day)}
-              {/* <td className={styles.filledCell} onClick={this.props.handleDayClick}>7</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>8</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>9</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>10</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>11</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>12</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>13</td> */}
             </tr>
             <tr>
               {calendarPage[2].map((day) => day)}
-              {/* <td className={styles.filledCell} onClick={this.props.handleDayClick}>14</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>15</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>16</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>17</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>18</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>19</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>20</td> */}
             </tr>
             <tr>
               {calendarPage[3].map((day) => day)}
-              {/* <td className={styles.filledCell} onClick={this.props.handleDayClick}>21</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>22</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>23</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>24</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>25</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>26</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>27</td> */}
             </tr>
             <tr>
               {calendarPage[4].map((day) => day)}
-              {/* <td className={styles.filledCell} onClick={this.props.handleDayClick}>28</td>
-              <td className={styles.filledCell} onClick={this.props.handleDayClick}>29</td>
-              <td className={styles.greyCell}>1</td>
-              <td className={styles.greyCell}>2</td>
-              <td className={styles.greyCell}>3</td>
-              <td className={styles.greyCell}>4</td>
-              <td className={styles.greyCell}>5</td> */}
             </tr>
           </tbody>
         </table>
