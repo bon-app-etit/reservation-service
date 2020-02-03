@@ -96,13 +96,13 @@
   justify-content: center;
 }
 
-#monthYearContainer {
+.monthYearContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-#monthYear {
+.monthYear {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 600;
   font-size: .925rem;
@@ -124,7 +124,7 @@
   margin-bottom: 5px;
 }
 
-#tbody tr td {
+.tbody tr td {
   text-align: center;
   border: 1px solid rgb(230, 230, 230);
   width: calc(100% / 7);

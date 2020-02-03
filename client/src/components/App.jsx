@@ -103,7 +103,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          {this.state.displayCalendar ? <Calendar handleDayClick={this.handleDayClick} /> : null}
+          {this.state.displayCalendar ? <Calendar currentDate={this.date} handleDayClick={this.handleDayClick} /> : null}
         </div>
 
       </div>
