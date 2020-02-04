@@ -24,7 +24,9 @@ const queryDb = (callback) => {
     if (err) {
       callback(err);
     } else {
-      callback(null, data);
+      const randomNum = Math.floor(Math.random() * 99);
+      const randomData = data[randomNum];
+      callback(null, randomData);
     }
   });
 };

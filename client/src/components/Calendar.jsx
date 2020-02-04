@@ -14,11 +14,10 @@ class Calendar extends React.Component {
 
     this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
       'August', 'September', 'October', 'November', 'December'];
-    this.dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     this.closedDaysIndex = [];
-    for (let i = 0; i < this.dayNames.length; i += 1) {
-      if (this.props.openHours[this.dayNames[i]].length === 0) {
+    for (let i = 0; i < this.props.dayNames.length; i += 1) {
+      if (this.props.openHours[this.props.dayNames[i]].length === 0) {
         this.closedDaysIndex.push(i);
       }
     }
@@ -26,7 +25,7 @@ class Calendar extends React.Component {
     this.currentDate = new Date();
     this.currentDay = this.currentDate.getDate();
     this.currentMonth = Number(this.currentDate.getMonth());
-    this.currentYear = this.currentDate.getFullYear(); 
+    this.currentYear = this.currentDate.getFullYear();
   }
 
   generateCalendar(year, month) {

@@ -2,7 +2,7 @@
   padding: 14px 11px 11px;
   border: 1px solid rgb(230, 230, 230);
   border-radius: 4px;
-  width: 317px;
+  width: 295px;
   height: 155px;
 }
 
@@ -30,8 +30,8 @@
 }
 
 #selectRow {
-  margin-left: -3px;
-  margin-right: -3px;
+  margin-left: -8px;
+  margin-right: -8px;
   display: flex;
   table-layout: auto;
   border-spacing: 6px;
@@ -40,7 +40,7 @@
 }
 
 #time {
-  width: 49%;
+  width: 48%;
   height: 100%;
   padding: 5px 24px 5px 30px;
   margin: 0 auto;
@@ -49,7 +49,7 @@
 }
 
 #party {
-  width: 49%;
+  width: 48%;
   height: 100%;
   padding: 5px 24px 5px 30px;
   margin: 0 auto;
