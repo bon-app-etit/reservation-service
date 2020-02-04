@@ -15,12 +15,18 @@ class Calendar extends React.Component {
     this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
       'August', 'September', 'October', 'November', 'December'];
     this.dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
     this.closedDaysIndex = [];
     for (let i = 0; i < this.dayNames.length; i += 1) {
       if (this.props.openHours[this.dayNames[i]].length === 0) {
         this.closedDaysIndex.push(i);
       }
     }
+
+    this.currentDate = new Date();
+    this.currentDay = this.currentDate.getDate();
+    this.currentMonth = Number(this.currentDate.getMonth());
+    this.currentYear = this.currentDate.getFullYear(); 
   }
 
   generateCalendar(year, month) {
@@ -29,11 +35,6 @@ class Calendar extends React.Component {
 
     const numOfDaysPrev = 32 - new Date(year, month - 1, 32).getDate();
     const lastDayofPrevMonth = new Date(year, month - 1, numOfDaysPrev).getDay();
-
-    const currentDate = new Date();
-    const currentDay = currentDate.getDate();
-    const currentMonth = Number(currentDate.getMonth());
-    const currentYear = currentDate.getFullYear();
 
     let date = 1;
     const calendarRows = [];
@@ -66,7 +67,7 @@ class Calendar extends React.Component {
           if (this.closedDaysIndex.includes(i)) {
             const greyCell = <td className={styles.greyCell} key={`current${date}`}>{date}</td>;
             daysInRow.push(greyCell);
-          } else if (month === currentMonth && date < currentDay) {
+          } else if (month === this.currentMonth && date < this.currentDay) {
             const greyCell = <td className={styles.greyCell} key={`current${date}`}>{date}</td>;
             daysInRow.push(greyCell);
           } else {
@@ -128,7 +129,9 @@ class Calendar extends React.Component {
       <div className={styles.calendar}>
         <div className={styles.captionRow}>
           <div className={styles.arrowButton}>
-            <div className={styles.leftArrow} onClick={this.handleLeftArrowClick.bind(this)}><i className="fas fa-angle-left" /></div>
+            {(this.state.year >= this.currentYear && this.state.month > this.currentMonth)
+              ? <div className={styles.leftArrow} onClick={this.handleLeftArrowClick.bind(this)}><i className="fas fa-angle-left" /></div>
+              : <div /> }
           </div>
           <div className={styles.monthYearContainer}>
             <div className={styles.monthYear}>
