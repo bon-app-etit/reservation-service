@@ -61,6 +61,10 @@ class App extends React.Component {
     });
   }
 
+  onMouseDown(event) {
+    event.target.style.background = '#be2020';
+  }
+
   handleDayClick(event) {
     let month = Number(event.target.getAttribute('month')) + 1;
     const year = event.target.getAttribute('year');
@@ -110,7 +114,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          <button id={styles.button}>Find a Table</button>
+          <button id={styles.button} onMouseDown={this.onMouseDown}>Find a Table</button>
         </div>
 
         <div>
