@@ -30,7 +30,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // this.getData();
+    this.getData();
     this.setState({
       dateUTC: new Date(),
       date: this.date.toDateString(),
