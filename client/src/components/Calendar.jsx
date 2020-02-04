@@ -45,12 +45,28 @@ class Calendar extends React.Component {
       for (let i = 0; i < 7; i += 1) {
         if (r === 0 && i < firstDayOfMonth) {
           const prevDate = numOfDaysPrev - (lastDayofPrevMonth - i);
-          const greyCell = <td className={styles.greyCell} key={`prev${prevDate}`}>{prevDate}</td>;
-          daysInRow.push(greyCell);
+          if (month === this.currentMonth || this.closedDaysIndex.includes(i)) {
+            const greyCell = <td className={styles.greyCell} key={`prev${prevDate}`}>{prevDate}</td>;
+            daysInRow.push(greyCell);
+          } else {
+            const futureGreyCell = (
+              <td
+                className={styles.futureGreyCell}
+                key={`next${prevDate}`}
+                month={month}
+                year={year}
+                day={prevDate}
+                onClick={this.props.handleDayClick}
+              >
+                {prevDate}
+              </td>
+            );
+            daysInRow.push(futureGreyCell);
+          }
         } else if (date > numOfDays) {
           const nextDate = date - numOfDays;
           const futureGreyCell = (
-            <td 
+            <td
               className={styles.futureGreyCell}
               key={`next${nextDate}`}
               month={month}
