@@ -44,7 +44,7 @@ class App extends React.Component {
   }
 
   getData() {
-    axios.get('/api/reservations/')
+    axios.get('/reservations/')
       .then((response) => {
         const dayOfWeek = this.date.getDay();
         const dayTimes = response.data.openHours[this.dayNames[dayOfWeek]];
