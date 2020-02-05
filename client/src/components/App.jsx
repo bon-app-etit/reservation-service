@@ -15,6 +15,7 @@ class App extends React.Component {
       time: '7:00 pm',
       partySize: '2 people',
       displayCalendar: false,
+      dateUTC: new Date(),
     };
 
     this.date = new Date();
@@ -33,6 +34,10 @@ class App extends React.Component {
 
   componentDidMount() {
     // this.getData();
+    this.setState({
+      dateUTC: new Date(),
+      date: this.date.toDateString(),
+    });
   }
 
   getData() {
@@ -59,6 +64,10 @@ class App extends React.Component {
     });
   }
 
+  onMouseDown(event) {
+    event.target.style.background = '#be2020';
+  }
+
   handleDayClick(event) {
     let month = Number(event.target.getAttribute('month')) + 1;
     const year = event.target.getAttribute('year');
@@ -74,6 +83,7 @@ class App extends React.Component {
     this.setState({
       date: dateString,
       displayCalendar: false,
+      dateUTC: dateUTC,
     });
   }
 
@@ -93,7 +103,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          <input id={styles.calendarSelect} defaultValue={this.dateString} value={this.state.date} onClick={this.displayCalendar} readOnly/>
+          <input id={styles.calendarSelect} defaultValue={this.dateString} value={this.state.date} onClick={this.displayCalendar} readOnly />
         </div>
 
         <div id={styles.selectRow}>
@@ -108,17 +118,17 @@ class App extends React.Component {
         </div>
 
         <div>
-          <button id={styles.button}>Find a Table</button>
+          <button id={styles.button} onMouseDown={this.onMouseDown}>Find a Table</button>
         </div>
 
         <div>
-          {this.state.displayCalendar ? <Calendar currentDate={this.date} handleDayClick={this.handleDayClick} /> : null}
+          {this.state.displayCalendar ? <Calendar selectedDate={this.state.dateUTC} openHours={sampleData.openHours} handleDayClick={this.handleDayClick} /> : null}
         </div>
 
       </div>
 
     );
-  };
+  }
 }
 
 export default App;
