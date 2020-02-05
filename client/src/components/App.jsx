@@ -16,13 +16,15 @@ class App extends React.Component {
       partySize: '2 people',
       displayCalendar: false,
       dateUTC: new Date(),
+      dayOfWeek: null,
+      restaurantData: null,
     };
 
     this.date = new Date();
     this.dateString = this.date.toDateString();
+    this.dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     this.partySizes = ['1 person'];
-    this.generatePartySizes(this.partySizes);
 
     this.partySizes = ['1 person'];
     this.generatePartySizes(this.partySizes);
@@ -33,34 +35,51 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // this.getData();
     this.setState({
       dateUTC: new Date(),
       date: this.date.toDateString(),
+      dayOfWeek: this.date.getDay(),
     });
+    this.getData();
   }
 
   getData() {
     axios.get('/api/reservations/')
-      .then(response => {
-        console.log(response);
+      .then((response) => {
+        const dayOfWeek = this.date.getDay();
+        const dayTimes = response.data.openHours[this.dayNames[dayOfWeek]];
+        this.setState({
+          restaurantData: response.data,
+          time: dayTimes.includes('7:00 pm') ? '7:00 pm' : dayTimes[5],
+        });
+        return response;
       })
-      .catch(err => {
+      .then(() => {
+        this.generatePartySizes(this.partySizes);
+      })
+      .catch((err) => {
         console.log('Error contating server! ', err);
       });
   }
 
   generatePartySizes(array) {
-    let maxSize = sampleData.maxPartySize
-    for (var i = 2; i <= maxSize; i++) {
-      let size = `${i} people`;
+    const { restaurantData } = this.state;
+    const maxSize = restaurantData.maxPartySize;
+    for (let i = 2; i <= maxSize; i += 1) {
+      const size = `${i} people`;
       array.push(size);
     }
+    this.setState({
+      partySize: '2 people',
+    });
   }
 
   displayCalendar() {
+    const {
+      displayCalendar,
+    } = this.state;
     this.setState({
-      displayCalendar: !this.state.displayCalendar,
+      displayCalendar: !displayCalendar,
     });
   }
 
@@ -83,7 +102,8 @@ class App extends React.Component {
     this.setState({
       date: dateString,
       displayCalendar: false,
-      dateUTC: dateUTC,
+      dateUTC,
+      dayOfWeek: dateUTC.getDay(),
     });
   }
 
@@ -95,6 +115,9 @@ class App extends React.Component {
 
 
   render() {
+    const {
+      date, time, partySize, displayCalendar, dateUTC, dayOfWeek, restaurantData,
+    } = this.state;
     return (
       <div className={styles.reservationMod} id="reservationBox">
 
@@ -103,26 +126,26 @@ class App extends React.Component {
         </div>
 
         <div>
-          <input id={styles.calendarSelect} defaultValue={this.dateString} value={this.state.date} onClick={this.displayCalendar} readOnly />
+          <input id={styles.calendarSelect} defaultValue={this.dateString} value={date} onClick={this.displayCalendar} readOnly />
         </div>
 
         <div id={styles.selectRow}>
-          <select id={styles.time} name="time" value={this.state.time} onChange={this.handleChange}>
-            {sampleData.openHours.Mon.map((time, index) => <option value={time} key={index}>{time}</option>)}
+          <select id={styles.time} name="time" value={time} onChange={this.handleChange}>
+            {restaurantData && restaurantData.openHours[this.dayNames[dayOfWeek]].map((resTime, index) => <option value={resTime} key={index}>{resTime}</option>)}
           </select>
 
-          <select id={styles.party} name="partySize" value={this.state.partySize} onChange={this.handleChange}>
-            {this.partySizes.map((party, index) => <option value={party} key={index}>{party}</option>)}
+          <select id={styles.party} name="partySize" value={partySize} onChange={this.handleChange}>
+            {this.partySizes && this.partySizes.map((party, index) => <option value={party} key={index}>{party}</option>)}
           </select>
 
         </div>
 
         <div>
-          <button id={styles.button} onMouseDown={this.onMouseDown}>Find a Table</button>
+          <button id={styles.button} type="button" onMouseDown={this.onMouseDown}>Find a Table</button>
         </div>
 
         <div>
-          {this.state.displayCalendar ? <Calendar selectedDate={this.state.dateUTC} openHours={sampleData.openHours} handleDayClick={this.handleDayClick} /> : null}
+          {displayCalendar ? <Calendar selectedDate={dateUTC} openHours={restaurantData.openHours} dayNames={this.dayNames} handleDayClick={this.handleDayClick} /> : null}
         </div>
 
       </div>
