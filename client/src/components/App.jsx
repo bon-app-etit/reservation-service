@@ -25,7 +25,6 @@ class App extends React.Component {
     this.dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     this.partySizes = ['1 person'];
-    this.generatePartySizes(this.partySizes);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleDayClick = this.handleDayClick.bind(this);
@@ -50,6 +49,10 @@ class App extends React.Component {
           restaurantData: response.data,
           time: dayTimes.includes('7:00 pm') ? '7:00 pm' : dayTimes[5],
         });
+        return response;
+      })
+      .then(() => {
+        this.generatePartySizes(this.partySizes);
       })
       .catch((err) => {
         console.log('Error contating server! ', err);
@@ -57,11 +60,15 @@ class App extends React.Component {
   }
 
   generatePartySizes(array) {
-    const maxSize = sampleData.maxPartySize;
-    for (let i = 2; i <= maxSize; i++) {
+    const { restaurantData } = this.state;
+    const maxSize = restaurantData.maxPartySize;
+    for (let i = 2; i <= maxSize; i += 1) {
       const size = `${i} people`;
       array.push(size);
     }
+    this.setState({
+      partySize: '2 people',
+    });
   }
 
   displayCalendar() {
@@ -124,7 +131,7 @@ class App extends React.Component {
           </select>
 
           <select id={styles.party} name="partySize" value={partySize} onChange={this.handleChange}>
-            {this.partySizes.map((party, index) => <option value={party} key={index}>{party}</option>)}
+            {this.partySizes && this.partySizes.map((party, index) => <option value={party} key={index}>{party}</option>)}
           </select>
 
         </div>

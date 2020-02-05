@@ -1,12 +1,13 @@
 const express = require('express');
 const axios = require('axios');
 const db = require('../database/index.js');
+const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = 3002;
 
-app.use(express.static(__dirname + '/../client/dist'));
-app.listen(port, () => { console.log(`Now listening on ${port}`) });
+app.use(express.static(`${__dirname}/../client/dist`));
+app.listen(port, () => { console.log(`Now listening on ${port}`); });
 
 
 // Build route handlers
@@ -20,4 +21,4 @@ app.get('/api/reservations/', (req, res) => {
       res.status(200).send(data);
     }
   });
-})
+});
