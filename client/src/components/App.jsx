@@ -60,11 +60,16 @@ class App extends React.Component {
   }
 
   handleDayClick(event) {
-    let day = event.target.innerText;
+    let month = Number(event.target.getAttribute('month')) + 1;
+    const year = event.target.getAttribute('year');
+    let day = event.target.getAttribute('day');
     if (day < 10) {
       day = `0${day}`;
     }
-    const dateUTC = new Date(`2020-02-${day}T10:20:30Z`);
+    if (month < 10) {
+      month = `0${month}`;
+    }
+    const dateUTC = new Date(`${year}-${month}-${day}T10:20:30Z`);
     const dateString = dateUTC.toDateString();
     this.setState({
       date: dateString,
@@ -88,7 +93,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          <input id={styles.calendarSelect} defaultValue={this.dateString} value={this.state.date} onClick={this.displayCalendar} />
+          <input id={styles.calendarSelect} defaultValue={this.dateString} value={this.state.date} onClick={this.displayCalendar} readOnly/>
         </div>
 
         <div id={styles.selectRow}>
@@ -107,7 +112,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          {this.state.displayCalendar ? <Calendar handleDayClick={this.handleDayClick} /> : null}
+          {this.state.displayCalendar ? <Calendar currentDate={this.date} handleDayClick={this.handleDayClick} /> : null}
         </div>
 
       </div>
