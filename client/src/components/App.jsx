@@ -49,7 +49,6 @@ class App extends React.Component {
     axios.get('/reservations/')
       .then((response) => {
         const dayOfWeek = this.date.getDay();
-        console.log(response.data, response.data.openHours, this.dayNames, dayOfWeek);
         const dayTimes = response.data.openHours[this.dayNames[dayOfWeek]];
         this.setState({
           restaurantData: response.data,
