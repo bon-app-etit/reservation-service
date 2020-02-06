@@ -26,9 +26,6 @@ class App extends React.Component {
 
     this.partySizes = ['1 person'];
 
-    this.partySizes = ['1 person'];
-    this.generatePartySizes(this.partySizes);
-
     this.handleChange = this.handleChange.bind(this);
     this.handleDayClick = this.handleDayClick.bind(this);
     this.displayCalendar = this.displayCalendar.bind(this);
@@ -52,6 +49,7 @@ class App extends React.Component {
     axios.get('/reservations/')
       .then((response) => {
         const dayOfWeek = this.date.getDay();
+        console.log(response.data, response.data.openHours, this.dayNames, dayOfWeek);
         const dayTimes = response.data.openHours[this.dayNames[dayOfWeek]];
         this.setState({
           restaurantData: response.data,
