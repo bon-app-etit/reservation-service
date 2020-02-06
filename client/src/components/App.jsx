@@ -40,6 +40,11 @@ class App extends React.Component {
     this.getData();
   }
 
+  static onMouseDown(event) {
+    // eslint-disable-next-line no-param-reassign
+    event.target.style.background = '#be2020';
+  }
+
   getData() {
     axios.get('/reservations/')
       .then((response) => {
@@ -80,9 +85,6 @@ class App extends React.Component {
     });
   }
 
-  onMouseDown(event) {
-    event.target.style.background = '#be2020';
-  }
 
   handleDayClick(event) {
     let month = Number(event.target.getAttribute('month')) + 1;
@@ -116,34 +118,53 @@ class App extends React.Component {
     } = this.state;
     return (
       <div className={styles.reservationMod} id="reservationBox">
-
         <div>
           <h2 id={styles.header}>Make a Reservation</h2>
         </div>
-
         <div>
-          <input id={styles.calendarSelect} defaultValue={this.dateString} value={date} onClick={this.displayCalendar} readOnly />
+          <input
+            id={styles.calendarSelect}
+            defaultValue={this.dateString}
+            value={date}
+            onClick={this.displayCalendar}
+            readOnly
+          />
         </div>
-
         <div id={styles.selectRow}>
           <select id={styles.time} name="time" value={time} onChange={this.handleChange}>
-            {restaurantData && restaurantData.openHours[this.dayNames[dayOfWeek]].map((resTime, index) => <option value={resTime} key={index}>{resTime}</option>)}
+            {restaurantData && restaurantData.openHours[this.dayNames[dayOfWeek]].map((resTime) => (
+              <option
+                value={resTime}
+                key={resTime}
+              >
+                {resTime}
+              </option>
+            ))}
           </select>
-
           <select id={styles.party} name="partySize" value={partySize} onChange={this.handleChange}>
-            {this.partySizes && this.partySizes.map((party, index) => <option value={party} key={index}>{party}</option>)}
+            {this.partySizes && this.partySizes.map((party) => (
+              <option
+                value={party}
+                key={party}
+              >
+                {party}
+              </option>
+            ))}
           </select>
-
         </div>
-
         <div>
-          <button id={styles.button} type="button" onMouseDown={this.onMouseDown}>Find a Table</button>
+          <button id={styles.button} type="button" onMouseDown={App.onMouseDown}>Find a Table</button>
         </div>
-
         <div>
-          {displayCalendar ? <Calendar selectedDate={dateUTC} openHours={restaurantData.openHours} dayNames={this.dayNames} handleDayClick={this.handleDayClick} /> : null}
+          {displayCalendar ? (
+            <Calendar
+              selectedDate={dateUTC}
+              openHours={restaurantData.openHours}
+              dayNames={this.dayNames}
+              handleDayClick={this.handleDayClick}
+            />
+          ) : null}
         </div>
-
       </div>
 
     );
