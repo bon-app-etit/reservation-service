@@ -26,6 +26,9 @@ class Calendar extends React.Component {
     this.currentDay = this.currentDate.getDate();
     this.currentMonth = Number(this.currentDate.getMonth());
     this.currentYear = this.currentDate.getFullYear();
+
+    this.handleLeftArrowClick = this.handleLeftArrowClick.bind(this);
+    this.handleRightArrowClick = this.handleRightArrowClick.bind(this);
   }
 
   generateCalendar(year, month) {
@@ -48,12 +51,18 @@ class Calendar extends React.Component {
             const greyCell = <td className={styles.greyCell} key={`prev${prevDate}`}>{prevDate}</td>;
             daysInRow.push(greyCell);
           } else {
+            let prevMonth = month - 1;
+            let prevYear = year;
+            if (month === 0) {
+              prevMonth = 11;
+              prevYear = year - 1;
+            }
             const futureGreyCell = (
               <td
                 className={styles.futureGreyCell}
                 key={`next${prevDate}`}
-                month={month}
-                year={year}
+                month={prevMonth}
+                year={prevYear}
                 day={prevDate}
                 onClick={this.props.handleDayClick}
               >
@@ -64,12 +73,18 @@ class Calendar extends React.Component {
           }
         } else if (date > numOfDays) {
           const nextDate = date - numOfDays;
+          let nextMonth = month + 1;
+          let nextYear = year;
+          if (month === 11) {
+            nextMonth = 0;
+            nextYear = year + 1;
+          }
           const futureGreyCell = (
             <td
               className={styles.futureGreyCell}
               key={`next${nextDate}`}
-              month={month}
-              year={year}
+              month={nextMonth}
+              year={nextYear}
               day={nextDate}
               onClick={this.props.handleDayClick}
             >
@@ -144,9 +159,9 @@ class Calendar extends React.Component {
       <div className={styles.calendar}>
         <div className={styles.captionRow}>
           <div className={styles.arrowButton}>
-            {(this.state.year >= this.currentYear && this.state.month > this.currentMonth)
-              ? <div className={styles.leftArrow} onClick={this.handleLeftArrowClick.bind(this)}><i className="fas fa-angle-left" /></div>
-              : <div /> }
+            {(this.state.year > this.currentYear || this.state.month > this.currentMonth)
+              ? <div className={styles.leftArrow} onClick={this.handleLeftArrowClick}><i className="fas fa-angle-left" /></div>
+              : <div />}
           </div>
           <div className={styles.monthYearContainer}>
             <div className={styles.monthYear}>
@@ -156,7 +171,7 @@ class Calendar extends React.Component {
             </div>
           </div>
           <div className={styles.arrowButton}>
-            <div className={styles.rightArrow} onClick={this.handleRightArrowClick.bind(this)}><i className="fas fa-angle-right" /></div>
+            <div className={styles.rightArrow} onClick={this.handleRightArrowClick}><i className="fas fa-angle-right" /></div>
           </div>
         </div>
         <table>
