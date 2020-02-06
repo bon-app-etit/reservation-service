@@ -10,10 +10,10 @@ class App extends React.Component {
 
     this.state = {
       date: this.dateString,
+      dateUTC: new Date(),
       time: undefined,
       partySize: undefined,
       displayCalendar: false,
-      dateUTC: new Date(),
       dayOfWeek: null,
       restaurantData: null,
     };
