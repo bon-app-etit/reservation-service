@@ -20,21 +20,21 @@ const seedDb = () => {
     const dinner = ['5:00 pm', '5:30 pm', '6:00 pm', '6:30 pm', '7:00 pm', '7:30 pm', '8:00 pm', '8:30 pm', '9:00 pm', '9:30 pm', '10:00 pm', '10:30 pm'];
 
     // True-biased true-false generator
-    const generateBool = () => { return Math.random() >= 0.3; };
+    const generateBool = () => (Math.random() >= 0.3);
 
     // Generate random businessHours data
-    const isOpenBreakfast = generateBool();
+    const isClosedBreakfast = generateBool();
     const isOpenLunch = generateBool();
     let isOpenDinner = generateBool();
     const isClosedSundays = generateBool();
     const isClosedMondays = generateBool();
 
     // Apply randomization of hours
-    if (!isOpenBreakfast && !isOpenLunch && !isOpenDinner) {
+    if (isClosedBreakfast === true && isOpenLunch === false && isOpenDinner === false) {
       isOpenDinner = true;
     }
 
-    if (!isOpenBreakfast) {
+    if (!isClosedBreakfast) {
       for (day in businessHours) {
         businessHours[day] = businessHours[day].concat(breakfast);
       }

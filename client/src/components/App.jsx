@@ -4,16 +4,14 @@ import Calendar from './Calendar.jsx';
 
 import styles from './styles.css';
 
-import sampleData from '../../../database/sampleData';
-
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       date: this.dateString,
-      time: '7:00 pm',
-      partySize: '2 people',
+      time: undefined,
+      partySize: undefined,
       displayCalendar: false,
       dateUTC: new Date(),
       dayOfWeek: null,
@@ -23,7 +21,6 @@ class App extends React.Component {
     this.date = new Date();
     this.dateString = this.date.toDateString();
     this.dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
     this.partySizes = ['1 person'];
 
     this.handleChange = this.handleChange.bind(this);
@@ -85,7 +82,6 @@ class App extends React.Component {
     });
   }
 
-
   handleDayClick(event) {
     let month = Number(event.target.getAttribute('month')) + 1;
     const year = event.target.getAttribute('year');
@@ -111,7 +107,6 @@ class App extends React.Component {
       [event.target.name]: event.target.value,
     });
   }
-
 
   render() {
     const {
@@ -143,7 +138,7 @@ class App extends React.Component {
             ))}
           </select>
           <select id={styles.party} name="partySize" value={partySize} onChange={this.handleChange}>
-            {this.partySizes && this.partySizes.map((party) => (
+            {partySize && this.partySizes.map((party) => (
               <option
                 value={party}
                 key={party}
