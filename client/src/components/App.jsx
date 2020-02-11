@@ -46,8 +46,6 @@ class App extends React.Component {
     axios.get('/reservations/')
       .then((response) => {
         const dayOfWeek = this.date.getDay();
-        // add check for if it is closed on this day
-
         const dayTimes = response.data.openHours[this.dayNames[dayOfWeek]];
         this.setState({
           restaurantData: response.data,
