@@ -8,15 +8,19 @@ db.once('open', () => {
   console.log('successfully connect to yelp-calendar db');
 });
 
-
-// Define mongoDb Schema and Model
+/* ***** Zacks's Schema ********************************************* */
+// Define mongoDb Schema and Model 
 const calendarSchema = mongoose.Schema({
   openHours: Object,
   maxPartySize: Number,
 });
 
 const Calendar = mongoose.model('Calendar', calendarSchema);
+/* ******************************************************************* */
 
+// Restaurant Data Schema
+
+// Reservation Data Schema
 
 // Define function to query db
 const queryDb = (callback) => {
