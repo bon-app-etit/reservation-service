@@ -42,7 +42,7 @@ npm install
 #### GET /restaurant:id 
 loads restaurant data using unique restaurant id as parameter
 #### POST /restaurant 
-adds new restaurant data to database, should include data like restaurant name, reservation hours, number of tables, max reservation duration, max/min number of people for reservation, DOES IT EVEN HAVE A WAITLIST, allowed to make more than one reservation per day
+adds new restaurant data to database, should include data like restaurant name, reservation hours, number of tables, max reservation duration, max/min number of people for reservation, if it even has a waitlist, allowed to make more than one reservation per day
 #### PUT /restaurant:id 
 updates restaurant data according to unique restaurant id
 #### DELETE /restaurant:id 
