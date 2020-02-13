@@ -40,7 +40,7 @@ npm install
 ## API routes
 
 ## restaurant-specific routes
-GET /restaurant:id - loads restaurant data using unique restaurant name as parameter
+GET /restaurant:id - loads restaurant data using unique restaurant id as parameter
 POST /restaurant - adds new restaurantdata to database, should include data like
   restaurant name, reservation hours, number of tables, max reservation duration, 
   max/min number of people for reservation, DOES IT EVEN HAVE A WAITLIST, allowed

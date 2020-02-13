@@ -44,7 +44,7 @@ app.get('/reservations/', (req, res) => {
 app.post('/reserve', controller.reservations.addReservation);
 
 // read All
-app.get('/allReservations', controller.reservations.getAllReservations);
+app.get('/allReservations/:name', controller.reservations.getAllReservations);
 
 // read one reservation
 app.get('/reservation/:id', controller.reservations.getOneReservation);
