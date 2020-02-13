@@ -7,6 +7,8 @@ module.exports.controller = {
 
     getAllReservations: (req, res) => {
       // get all reservations (possibly for businessowners)
+      const { name } = req.params;
+      
     },
 
     getOneReservation: (req, res) => {
