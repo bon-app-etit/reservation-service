@@ -38,23 +38,26 @@ npm install
 ```
 
 ## API routes
+### restaurant-specific routes
+#### GET /restaurant:id 
+loads restaurant data using unique restaurant id as parameter
+#### POST /restaurant 
+adds new restaurantdata to database, should include data like restaurant name, reservation hours, number of tables, max reservation duration, max/min number of people for reservation, DOES IT EVEN HAVE A WAITLIST, allowed to make more than one reservation per day
+#### PUT /restaurant:id 
+updates restaurant data according to unique restaurant id
+#### DELETE /restaurant:id 
+deletes restaurant data according to unique restaurant id
 
-## restaurant-specific routes
-GET /restaurant:id - loads restaurant data using unique restaurant id as parameter
-POST /restaurant - adds new restaurantdata to database, should include data like
-  restaurant name, reservation hours, number of tables, max reservation duration, 
-  max/min number of people for reservation, DOES IT EVEN HAVE A WAITLIST, allowed
-  to make more than one reservation per day
-PUT /restaurant:id - updates restaurant data according to unique restaurant id
-DELETE /restaurant:id - deletes restaurant data according to unique restaurant id
 
-## reservation specific routes
-GET /reservation/:id - get one reservation from the database, requires reservation id
-GET /allReservations/:name - for the restaurant owner side, obtain a list of all
-  the reservations for the restaurant with perhaps an option of selecting by date
-POST /reservation - add reservation to database, should require data like
-  a specific time, username (required), number of people in party, perhaps handle
-  if a user can make multiple reservations in a day
-PUT /reservation:id - updates a reservation according to unique reservation id
-DELETE /reservation:id - deletes reservation data according to unique reservation id
+### reservation specific routes
+####  GET /reservation/:id 
+get one reservation from the database, requires reservation id
+#### GET /allReservations/:restaurantId 
+for the restaurant owner side, obtain a list of all the reservations for the restaurant with perhaps an option of selecting by date in req.body
+#### POST /reservation/:restaurantId
+add reservation to database, should require data like a specific time, username (required), number of people in party, perhaps handle if a user can make multiple reservations in a day. Param is the Id of the restaurant one wants to make a reservation for.
+#### PUT /reservation:id 
+updates a reservation according to unique reservation id
+#### DELETE /reservation:id 
+deletes reservation data according to unique reservation id
 

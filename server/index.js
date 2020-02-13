@@ -41,10 +41,10 @@ app.get('/reservations/', (req, res) => {
 */
 
 // create
-app.post('/reserve', controller.reservations.addReservation);
+app.post('/reservation/:restaurantId', controller.reservations.addReservation);
 
 // read All
-app.get('/allReservations/:name', controller.reservations.getAllReservations);
+app.get('/allReservations/:restaurantId', controller.reservations.getAllReservations);
 
 // read one reservation
 app.get('/reservation/:id', controller.reservations.getOneReservation);
@@ -54,6 +54,7 @@ app.put('/reservations/:id', controller.reservations.updateReservation);
 
 // delete
 app.delete('/reservations/:id', controller.reservations.deleteReservation);
+
 
 // GENERAL RESTAURANT DATA
 // to know if waitlist is available and when reservations are allowed
