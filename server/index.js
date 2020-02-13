@@ -39,6 +39,7 @@ app.get('/reservations/', (req, res) => {
   Date
   Time
 */
+// RESERVATION DATA
 
 // create
 app.post('/reservation/:restaurantId', controller.reservations.addReservation);
@@ -69,3 +70,10 @@ app.put('/restaurant/:id', controller.restaurants.updateRestaurant);
 
 // delete
 app.delete('/restaurant/:id', controller.restaurants.deleteRestaurant);
+
+
+// USER DATA
+app.post('/reservation/user', controller.users.addUser);
+app.get('/reservation/user/:userId', controller.users.findUser);
+app.put('/reservation/user/:userId', controller.users.updateUser);
+app.delete('/reservation/user/:userId', controller.users.deleteUser);

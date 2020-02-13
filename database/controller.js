@@ -41,4 +41,22 @@ module.exports.controller = {
       // delete restautant data with id parameter
     },
   },
+
+  users: {
+    addUser: (req, res) => {
+      // add a user
+    },
+
+    findUser: (req, res) => {
+      // get a user from database with UserId as parameter
+    },
+
+    updateUser: (req, res) => {
+      // update user data with UserId as parameter
+    },
+
+    deleteUser: (req, res) => {
+      // delete user data with UserId as parameter
+    }
+  }
 };
