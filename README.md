@@ -46,7 +46,7 @@ npm install
 
 #### `POST` /restaurant 
   * adds new restaurant data to database
-   ```
+  ```
   req.body: {
     name: [string]
     [dayOfWeek]_start: [time]
@@ -96,7 +96,8 @@ npm install
 #### `GET` /manyReservations/:restaurantId 
   * for the restaurant owner side, obtain a list of all the reservations for the   restaurant with perhaps an option of selecting by date in req.body
   * URL Params: restaurantId=`[integer]`
-     ```
+
+  ```
    req.body: {
     reservationId: [integer]
     userid: [integer]
@@ -105,7 +106,7 @@ npm install
     time: [time]
     special_accomodations: [string]
   }
-   ```
+  ```
   * all req.body data optional to filter out search
   * no req.body data defaults to all set reservations
 
