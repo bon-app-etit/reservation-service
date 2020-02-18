@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const fs = require('fs');
+const fs = require('graceful-fs');
 const faker = require('faker');
 const makeOneHundredReservations = require('./csvReservationsPostgres.js');
 
@@ -7,25 +7,29 @@ const makeOneHundredReservations = require('./csvReservationsPostgres.js');
 // data possibly not in faker
 const openHours = ['8:00', '8:30', '9:00', '11:00', '11:30', '12:00', '12:30', '13:00'];
 const closeHours = ['17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00'];
-const foodSuffixes = [' House', ' Express', ' Restaurant', ' Bistro', ' Cuisine', ' Bar', ' Pub', ' Deli', ' Barbeque', ' BBQ', ' Buffet', ' Sandwiches', ' Chicken'];
+const restaurantSuffixes = [' House', ' Express', ' Restaurant', ' Bistro', ' Cuisine', ' Bar', ' Pub', ' Deli', ' Barbeque', ' BBQ', ' Buffet', ' Sandwiches', ' Chicken'];
 const resLimit = [60, 90, 120];
 
 // methods
 const getRandomElement = (array) => array[Math.floor(Math.random() * array.length)];
+// pseudo random names in format either [city name] + restaurantSuffix or [firstName]'s restaurantSuffix. eg: New York Deli, Mark's BBQ.
 const generateRestaurantName = () => {
-  if (Math.random() < 0.4) {
-    return faker.address.city() + getRandomElement(foodSuffixes);
+  if (Math.random() < 0.6) {
+    return faker.address.city() + getRandomElement(restaurantSuffixes);
   }
-  return `${faker.name.firstName()}'s${getRandomElement(foodSuffixes)}`;
+  return `${faker.name.firstName()}'s${getRandomElement(restaurantSuffixes)}`;
 };
 
 
 const write = fs.createWriteStream('./restaurantsTest.csv');
-write.write('id,name,monday_start,monday_end,tuesday_start,tuesday_end,wednesday_start,wednesday_end,thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,reservation_allowed,max_number,min_number,reservation_duration,allowed_months_ahead,1_seat_count,2_seat_count,3_seat_count,4_seat_count,5_seat_count,6_seat_count,7_seat_count,8_seat_count,9_seat_count,10_seat_count,11_seat_count,12_seat_count,13_seat_count,14_seat_count,15_seat_count\n', 'utf8');
-write.setMaxListeners(100);
+// write.write('id,name,monday_start,monday_end,tuesday_start,tuesday_end,wednesday_start,wednesday_end,thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,reservation_allowed,max_number,min_number,reservation_duration,allowed_months_ahead,1_seat_count,2_seat_count,3_seat_count,4_seat_count,5_seat_count,6_seat_count,7_seat_count,8_seat_count,9_seat_count,10_seat_count,11_seat_count,12_seat_count,13_seat_count,14_seat_count,15_seat_count\n', 'utf8');
+write.setMaxListeners(1000);
+
+const reserveWrite = fs.createWriteStream('./reservationsTest.csv', { flags: 'a', emitClose: true });
+reserveWrite.setMaxListeners(5000);
 
 function writeTenMillionRestaurants(writer, encoding, callback) {
-  let i = 10;
+  let i = 10000000;
   let id = 0;
   // eslint-disable-next-line no-shadow
   function write() {
@@ -42,8 +46,8 @@ function writeTenMillionRestaurants(writer, encoding, callback) {
       // dealing with possibility that they can be closed on sunday or monday
       const mondayOpen = Math.random() < 0.9;
       const sundayOpen = Math.random() < 0.85;
-      const name = generateRestaurantName();
 
+      const name = generateRestaurantName();
       const mondayStart = mondayOpen ? weekdayHoursStart : null;
       const mondayEnd = mondayOpen ? weekdayHoursEnd : null;
       const tuesdayStart = weekdayHoursStart;
@@ -82,11 +86,11 @@ function writeTenMillionRestaurants(writer, encoding, callback) {
       const data = `${id},${name},${mondayStart},${mondayEnd},${tuesdayStart},${tuesdayEnd},${wednesdayStart},${wednesdayEnd},${thursdayStart},${thursdayEnd},${fridayStart},${fridayEnd},${saturdayStart},${saturdayEnd},${sundayStart},${sundayEnd},${reservationAllowed},${maxNumber},${minNumber},${reservationDuration},${allowedMonthsAhead},${oneSeatCount},${twoSeatCount},${threeSeatCount},${fourSeatCount},${fiveSeatCount},${sixSeatCount},${sevenSeatCount},${eightSeatCount},${nineSeatCount},${tenSeatCount},${elevenSeatCount},${twelveSeatCount},${thirteenSeatCount},${fourteenSeatCount},${fifteenSeatCount}\n`;
 
       if (reservationAllowed) {
-        const reserveWrite = fs.createWriteStream('./reservationsTest.csv', { flags: 'a', emitClose: true });
-        reserveWrite.setMaxListeners(2000);
         makeOneHundredReservations(reserveWrite, 'utf-8', () => {
           reserveWrite.end();
-        }, id, weekdayHoursStart, weekdayHoursEnd, maxNumber, minNumber, reservationDuration, allowedMonthsAhead);
+        },
+        // all the arguments passed in to make reservations more accurate.
+        id, weekdayHoursStart, weekdayHoursEnd, maxNumber, minNumber, reservationDuration, allowedMonthsAhead);
       }
 
       if (i === 0) {

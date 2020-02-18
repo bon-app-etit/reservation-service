@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const fs = require('fs');
+const fs = require('graceful-fs');
 const faker = require('faker');
 
 
@@ -39,15 +39,15 @@ const GaussianRandom = () => {
   return Math.floor(Math.abs(gaussRandNum * 3 + 6)) + 1;
 };
 
-
+// to prevent reservationId from restarting, declare it in outer scope.
 let id = 0;
 const write = fs.createWriteStream('./reservationsTest.csv');
-write.write('id,date,time,number_people,restaurant_id,first_name,last_name,email,phone_number,notes\n', 'utf8');
+// write.write('id,restaurant_id,date,start_time, end_time,time1,time2,time3,time4,time5,time6,time7,time8,number_people,first_name,last_name,email,phone_number,notes\n', 'utf8');
 
 // default parameters to ensure no undefined arguments pass into the function
 function writeOneHundredReservations(writer, encoding, callback, restaurantId = 1, openTime = '13:00', closeTime = '17:00', maxNumber = 4, minNumber = 8, resLimit = 90, monthsAhead = 3) {
-  // Blindly assuming 100 - 200 reservations each restaurant
-  let i = Math.random() * 100 + 100;
+  // Blindly assuming 5-20 reservations each restaurant
+  let i = Math.random() * 15 + 5;
 
   // restrict possible hours to be specific to restaurant
   const openIndex = possibleTimeslots.indexOf(openTime);
@@ -59,6 +59,7 @@ function writeOneHundredReservations(writer, encoding, callback, restaurantId = 
     do {
       id += 1;
       i -= 1;
+
 
       // this block is tricky. Reserve next 4/6/8 timeslots depending on reservation limit. This block sets the times of one reservation.
       let randomTimeIndex = Math.floor(Math.random() * restaurantReservationHours.length - 8);
@@ -84,23 +85,33 @@ function writeOneHundredReservations(writer, encoding, callback, restaurantId = 
       // Gaussian distribution makes reservations of 5 to 7 people more likely
       const randomNumPeople = GaussianRandom();
 
-      // date is in YYYY-MM-DD format, some possibility of it being YYYY-MM-D
-      const date = `2020-0${Math.floor(Math.random() * monthsAhead + new Date().getMonth() + 1)}-${Math.floor(Math.random() * 30)}`;
+      // date is in YYYY-MM-DD format
+      const dayOfMonth = Math.floor(Math.random() * 29 + 1);
+      let date;
+      if (dayOfMonth < 10) {
+        date = `2020-0${Math.floor(Math.random() * monthsAhead + new Date().getMonth() + 1)}-0${dayOfMonth}`;
+      } else {
+        date = `2020-0${Math.floor(Math.random() * monthsAhead + new Date().getMonth() + 1)}-${dayOfMonth}`;
+      }
       // in the case the GaussianRandom number is below the restaurant min number for reservation or greater than max, just reassign it to max number.
       const numberPeople = randomNumPeople > maxNumber || randomNumPeople < minNumber ? maxNumber : randomNumPeople;
       const firstName = faker.name.firstName();
       const lastName = faker.name.lastName();
+      const startTime = timeArr[0];
+      const endTime = timeArr[resLimit / 15 - 1];
       const email = `${firstName.toLowerCase()}${lastName.toLowerCase()}${getRandomElement(emailDomains)}`;
       const phoneNumber = faker.phone.phoneNumberFormat(1);
       const notes = faker.lorem.sentence();
 
-      // this next block, it writes in reservations to CSV depending on what the reservation limit is for restaurant.
+      // logging timeslots the reservations covers
       let data;
-      for (let interval = 0; interval < resLimit / 15 - 1; interval += 1) {
-        data = `${id},${date},${timeArr[interval]},${numberPeople},${restaurantId},${firstName},${lastName},${email},${phoneNumber},${notes}\n`;
-        writer.write(data, encoding);
+      if (resLimit === 60) {
+        data = `${id},${restaurantId},${date},${startTime},${endTime},${startTime},${time2},${time3},${endTime},${''},${''},${''},${''},${numberPeople},${firstName},${lastName},${email},${phoneNumber},${notes}\n`;
+      } else if (resLimit === 90) {
+        data = `${id},${restaurantId},${date},${startTime},${endTime},${startTime},${time2},${time3},${time4},${time5},${endTime},${''},${''},${numberPeople},${firstName},${lastName},${email},${phoneNumber},${notes}\n`;
+      } else {
+        data = `${id},${restaurantId},${date},${startTime},${endTime},${startTime},${time2},${time3},${time4},${time5},${time6},${time7},${endTime},${numberPeople},${firstName},${lastName},${email},${phoneNumber},${notes}\n`;
       }
-      data = `${id},${date},${timeArr[resLimit / 15 - 1]},${numberPeople},${restaurantId},${firstName},${lastName},${email},${phoneNumber},${notes}\n`;
 
 
       if (i === 0) {
