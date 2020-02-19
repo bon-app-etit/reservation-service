@@ -42,7 +42,7 @@ const GaussianRandom = () => {
 // to prevent reservationId from restarting, declare it in outer scope.
 let id = 0;
 const write = fs.createWriteStream('./reservationsTest.csv');
-// write.write('id,restaurant_id,date,start_time, end_time,time1,time2,time3,time4,time5,time6,time7,time8,number_people,first_name,last_name,email,phone_number,notes\n', 'utf8');
+write.write('id,restaurant_id,date,start_time, end_time,time1,time2,time3,time4,time5,time6,time7,time8,number_people,first_name,last_name,email,phone_number,notes\n', 'utf8');
 
 // default parameters to ensure no undefined arguments pass into the function
 function writeOneHundredReservations(writer, encoding, callback, restaurantId = 1, openTime = '13:00', closeTime = '17:00', maxNumber = 4, minNumber = 8, resLimit = 90, monthsAhead = 3) {
