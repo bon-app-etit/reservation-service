@@ -39,21 +39,23 @@ app.get('/reservations/', (req, res) => {
   Date
   Time
 */
+// RESERVATION DATA
 
 // create
-app.post('/reserve', controller.reservations.addReservation);
+app.post('/restaurant/:restaurantId/reservation', controller.reservations.addReservation);
 
 // read All
-app.get('/allReservations', controller.reservations.getAllReservations);
+app.get('/restaurant/:restaurantId/allReservations', controller.reservations.getAllReservations);
 
 // read one reservation
-app.get('/reservation/:id', controller.reservations.getOneReservation);
+app.get('/reservation/:reservationId', controller.reservations.getOneReservation);
 
 // update
-app.put('/reservations/:id', controller.reservations.updateReservation);
+app.put('/reservation/:reservationId', controller.reservations.updateReservation);
 
 // delete
-app.delete('/reservations/:id', controller.reservations.deleteReservation);
+app.delete('/reservation/:reservationId', controller.reservations.deleteReservation);
+
 
 // GENERAL RESTAURANT DATA
 // to know if waitlist is available and when reservations are allowed
@@ -61,10 +63,10 @@ app.delete('/reservations/:id', controller.reservations.deleteReservation);
 app.post('/restaurant', controller.restaurants.addRestaurant);
 
 // read
-app.get('/restaurant/:id', controller.restaurants.getRestaurant);
+app.get('/restaurant/:restaurantId', controller.restaurants.getRestaurant);
 
 // update
-app.put('/restaurant/:id', controller.restaurants.updateRestaurant);
+app.put('/restaurant/:restaurantId', controller.restaurants.updateRestaurant);
 
 // delete
-app.delete('/restaurant/:id', controller.restaurants.deleteRestaurant);
+app.delete('/restaurant/:restaurantId', controller.restaurants.deleteRestaurant);

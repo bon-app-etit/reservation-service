@@ -35,7 +35,7 @@ module.exports.controller = {
       // update restautant data with id as parameter
     },
 
-    deleteRestaurant: (req,res) => {
+    deleteRestaurant: (req, res) => {
       // delete restautant data with id parameter
     },
   },
