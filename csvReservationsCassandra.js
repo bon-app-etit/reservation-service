@@ -147,10 +147,4 @@ function writeOneHundredReservations(writer, encoding, callback, openTime = '13:
   write();
 }
 
-writeOneHundredReservations(
-  write, 'utf-8', () => {
-    write.end();
-  },
-);
-
 module.exports = writeOneHundredReservations;

@@ -107,7 +107,6 @@ function writeTenMillionRestaurants(writer, encoding, callback) {
   write();
 }
 
-
 writeTenMillionRestaurants(write, 'utf-8', () => {
   write.end();
   reserveWrite.end();
